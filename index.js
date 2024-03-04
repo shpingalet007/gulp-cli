@@ -114,7 +114,12 @@ module.exports = run;
 
 function onPrepare(env) {
   var cfg = mergeProjectAndUserHomeConfigs(env);
+
+  console.log('DEBUG_SH007: Env values before =', env);
+
   env = overrideEnvFlagsByConfigAndCliOpts(env, cfg, opts);
+
+  console.log('DEBUG_SH007: Env values after =', env);
 
   // Set up event listeners for logging again after configuring.
   toConsole(log, env.config.flags);
@@ -143,6 +148,8 @@ function onExecute(env) {
     console.log('Local version:', env.modulePackage.version || 'Unknown');
     exit(0);
   }
+
+  console.log('DEBUG_SH007: Env modulePath =', env.modulePath);
 
   if (!env.modulePath) {
     /* istanbul ignore next */
